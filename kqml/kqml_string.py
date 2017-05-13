@@ -1,4 +1,7 @@
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 from kqml import KQMLObject
 
 class KQMLString(object):
@@ -29,7 +32,7 @@ class KQMLString(object):
         out.write('"')
 
     def to_string(self):
-        out = StringIO.StringIO()
+        out = StringIO()
         self.write(out)
         return out.getvalue()
 
