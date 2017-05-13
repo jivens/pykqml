@@ -1,11 +1,11 @@
 import io
 import logging
-from kqml_exceptions import *
+from kqml.kqml_exceptions import *
 
-import kqml_list
-import kqml_performative
-from kqml_token import KQMLToken
-from kqml_string import KQMLString
+from kqml import kqml_performative
+from kqml import kqml_list
+from kqml.kqml_token import KQMLToken
+from kqml.kqml_string import KQMLString
 
 logger = logging.getLogger('KQMLReader')
 

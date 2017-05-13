@@ -3,9 +3,14 @@ try:
 except ImportError:
     from io import StringIO
 from kqml import KQMLObject
-from kqml_token import KQMLToken
-from kqml_string import KQMLString
-import kqml_reader
+from kqml import KQMLToken
+from kqml import KQMLString
+try:
+    # Python 3 import
+    from kqml import kqml_reader
+except Exception:
+    # Python 2 import
+    import kqml_reader
 
 class KQMLList(KQMLObject):
     def __init__(self, objects=None):

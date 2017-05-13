@@ -3,10 +3,15 @@ try:
 except ImportError:
     from io import StringIO
 from kqml import KQMLObject
-import kqml_reader
-import kqml_list
-from kqml_token import KQMLToken
-from kqml_exceptions import KQMLBadPerformativeException
+try:
+    # Python 3 import
+    from kqml import kqml_reader
+except Exception:
+    # Python 2 import
+    import kqml_reader
+from kqml import kqml_list
+from kqml.kqml_token import KQMLToken
+from kqml.kqml_exceptions import KQMLBadPerformativeException
 
 class KQMLPerformative(KQMLObject):
     def __init__(self, objects):
