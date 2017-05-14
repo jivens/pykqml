@@ -1,7 +1,14 @@
+from __future__ import print_function, unicode_literals
+from builtins import dict, str
+
 try:
-    from StringIO import StringIO
+    from BytesIO import BytesIO
 except ImportError:
-    from io import StringIO
+    from io import BytesIO
+try:
+    basestring
+except:
+    basestring = str
 from kqml import KQMLObject
 from kqml import KQMLToken
 from kqml import KQMLString
@@ -211,16 +218,16 @@ class KQMLList(KQMLObject):
 
     def write(self, out):
         full_str = '(' + ' '.join([str(s) for s in self.data]) + ')'
-        out.write(full_str)
+        out.write(full_str.encode('utf-8'))
 
     def to_string(self):
-        out = StringIO()
+        out = BytesIO()
         self.write(out)
         return out.getvalue()
 
     @classmethod
     def from_string(cls, s):
-        sreader = StringIO(s)
+        sreader = BytesIO(s)
         kreader = kqml_reader.KQMLReader(sreader)
         return kreader.read_list()
 

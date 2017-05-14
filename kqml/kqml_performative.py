@@ -1,7 +1,14 @@
+from __future__ import print_function, unicode_literals
+from builtins import dict, str
+
 try:
-    from StringIO import StringIO
+    from BytesIO import BytesIO
 except ImportError:
-    from io import StringIO
+    from io import BytesIO
+try:
+    basestring
+except:
+    basestring = str
 from kqml import KQMLObject
 try:
     # Python 3 import
@@ -70,7 +77,7 @@ class KQMLPerformative(KQMLObject):
 
     @classmethod
     def from_string(cls, s):
-        sreader = StringIO(s)
+        sreader = BytesIO(s)
         kreader = kqml_reader.KQMLReader(sreader)
         return cls(kreader.read_list())
 

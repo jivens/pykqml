@@ -1,3 +1,6 @@
+from __future__ import print_function, unicode_literals
+from builtins import dict, str
+
 import io
 import logging
 from kqml.kqml_exceptions import *
@@ -18,14 +21,14 @@ class KQMLReader(object):
         self.reader.close()
 
     def read_char(self):
-        ch = self.reader.read(1)
+        ch = self.reader.read(1).decode('utf-8')
         self.inbuf += ch
         return ch
 
     def unget_char(self, ch):
         # Rewind by 1 relative to current position
         self.reader.seek(-1, 1)
-        self.reader.write(ch)
+        self.reader.write(ch.encode('utf-8'))
         # Rewind by 1 relative to current position
         self.reader.seek(-1, 1)
         self.inbuf = self.inbuf[:-1]
@@ -35,7 +38,7 @@ class KQMLReader(object):
             ch_ = self.reader.peek(1)
             if not ch_:
                 raise EOFError
-            ch = ch_[0]
+            ch = ch_[0].decode('utf-8')
         else:
             ch = self.read_char()
             self.unget_char(ch)

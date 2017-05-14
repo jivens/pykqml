@@ -1,5 +1,13 @@
+from __future__ import print_function, unicode_literals
+from builtins import dict, str
+
 import re
+try:
+    basestring
+except:
+    basestring = str
 from kqml import KQMLObject
+
 
 class KQMLToken(KQMLObject):
     def __init__(self, s=None):
@@ -13,7 +21,8 @@ class KQMLToken(KQMLObject):
 
     def equals_ignore_case(self, s):
         if isinstance(s, KQMLToken) or isinstance(s, basestring):
-            return (self.data.lower() == s.lower())
+            return self.data.lower() == s.lower()
+        return False
 
     def lower(self):
         return self.data.lower()
@@ -22,7 +31,7 @@ class KQMLToken(KQMLObject):
         return self.data.upper()
 
     def write(self, out):
-        out.write(self.data)
+        out.write(self.data.encode())
 
     def to_string(self):
         return self.data

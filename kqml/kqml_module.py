@@ -1,3 +1,6 @@
+from __future__ import print_function, unicode_literals
+from builtins import dict, str
+
 import io
 import sys
 import socket
@@ -288,7 +291,7 @@ class KQMLModule(object):
         self.error_reply(msg, 'unexpected performative: unregister')
 
     def receive_other_performative(self, msg):
-        self.error_reply(msg, 'unexpected performative: ' + msg)
+        self.error_reply(msg, 'unexpected performative: ' + str(msg))
 
     def handle_exception(self, ex):
         self.logger.error(self.name + ': ' + str(ex))
@@ -299,7 +302,7 @@ class KQMLModule(object):
         except IOError:
             self.logger.error('IOError during message sending')
             pass
-        self.out.write('\n')
+        self.out.write('\n'.encode('utf-8'))
         self.out.flush()
         self.logger.debug(msg.__repr__())
 

@@ -1,7 +1,10 @@
+from __future__ import print_function, unicode_literals
+from builtins import dict, str
+
 try:
-    from StringIO import StringIO
+    from BytesIO import BytesIO
 except ImportError:
-    from io import StringIO
+    from io import BytesIO
 from kqml import KQMLObject
 
 class KQMLString(object):
@@ -24,17 +27,17 @@ class KQMLString(object):
             return obj.data == self.data
 
     def write(self, out):
-        out.write('"')
+        out.write('"'.encode('utf-8'))
         for ch in self.data:
             if ch == '"':
-                out.write('\\')
-            out.write(ch)
-        out.write('"')
+                out.write('\\'.encode('utf-8'))
+            out.write(ch.encode('utf-8'))
+        out.write('"'.encode('utf-8'))
 
     def to_string(self):
-        out = StringIO()
+        out = BytesIO()
         self.write(out)
-        return out.getvalue()
+        return out.getvalue().decode()
 
     def string_value(self):
         return self.data
