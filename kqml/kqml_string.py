@@ -5,7 +5,6 @@ try:
     from BytesIO import BytesIO
 except ImportError:
     from io import BytesIO
-from kqml import KQMLObject
 
 class KQMLString(object):
     def __init__(self, data=None):
@@ -37,7 +36,7 @@ class KQMLString(object):
     def to_string(self):
         out = BytesIO()
         self.write(out)
-        return out.getvalue().decode()
+        return out.getvalue().decode('utf-8')
 
     def string_value(self):
         return self.data

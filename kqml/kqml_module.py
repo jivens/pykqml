@@ -8,6 +8,14 @@ import logging
 from kqml import KQMLReader, KQMLDispatcher
 from kqml import KQMLList, KQMLPerformative
 
+if sys.version_info[0] < 3:
+    sin = sys.stdin
+    sout = sys.stdout
+# User bytes I/O in Python 3
+else:
+    sin = sys.stdin.buffer
+    sout = sys.stdout.buffer
+
 class KQMLModule(object):
     def __init__(self, argv, is_application=False):
         self.DEFAULT_HOST = 'localhost'
@@ -43,8 +51,8 @@ class KQMLModule(object):
                 self.exit(-1)
         else:
             self.logger.info('Using stdio connection')
-            self.out = sys.stdout
-            self.inp = KQMLReader(sys.stdin)
+            self.out = sout
+            self.inp = KQMLReader(sin)
 
         self.dispatcher = KQMLDispatcher(self, self.inp, self.name)
 

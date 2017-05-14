@@ -31,7 +31,7 @@ class KQMLToken(KQMLObject):
         return self.data.upper()
 
     def write(self, out):
-        out.write(self.data.encode())
+        out.write(self.data.encode('utf-8'))
 
     def to_string(self):
         return self.data
