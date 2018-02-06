@@ -7,4 +7,6 @@ python:
 before_install:
   - pip install nose coverage
 script:
-  - nosetests -v --with-coverage --cover-inclusive --cover-package=kqml
+  # Note: nose has to be run with nocapture to avoid the
+  # _io.StringIO object has no attribute "buffer" error
+  - nosetests --nocapture -v --with-coverage --cover-inclusive --cover-package=kqml
